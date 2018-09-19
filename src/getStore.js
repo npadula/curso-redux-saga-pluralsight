@@ -11,6 +11,10 @@ import thunk from 'redux-thunk'
 import { getQuery } from './utility'
 import { reducer } from './combineReducers';
 import { defaultState } from './defaultState'
+import createSagaMiddleware from "redux-saga";
+import {initSagas } from "./initSagas";
+
+
 
 const stateTransformer = (state) => {
     if (Iterable.isIterable(state)) return state.toJS();
@@ -22,7 +26,8 @@ const logger = createLogger({
 });
 
 export const getStore = ()=>{
-    const middleWares = [thunk];
+    const sagaMiddleware = createSagaMiddleware();
+    const middleWares = [sagaMiddleware,thunk];
     if (getQuery()['logger']) { middleWares.push(logger)}
     const composables = [applyMiddleware(...middleWares)]
     const enhancer = compose(
@@ -33,5 +38,8 @@ export const getStore = ()=>{
         defaultState,
         enhancer
     );
+
+    initSagas(sagaMiddleware); //Las sagas solo se pueden inicializar luego de setear el middleware en el store
+
     return store;
 };
