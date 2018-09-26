@@ -3,3 +3,8 @@ export {itemDetailsSaga} from "./itemDetailsSaga";
 export {fetchCartSaga} from "./fetchCartSaga";
 export {itemQuantitySaga} from "./itemQuantitySaga";
 export {itemPriceSaga} from "./itemPriceSaga";
+export {setCustomerServiceAvailabilitySaga} from "./customerServiceAvailabilitySaga";
+export {shippingSaga} from "./shippingSaga";
+export {taxRateSaga} from "./taxRateSaga";
+export {checkoutAvailabilitySaga} from "./checkoutAvailabilitySaga";
+export {checkoutSaga} from "./checkoutSaga";
